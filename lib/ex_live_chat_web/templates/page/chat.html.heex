@@ -1,0 +1,23 @@
+<form phx-submit="add">
+  <input class="small" type="text" name="name" placeholder="guest">
+  <input class="beeg" type="text" name="text" placeholder="msg" autofocus>
+  <input class="submit" type="submit" value="↻" />
+</form>
+
+<%# <div class="form" phx-submit="msg">
+  <
+  <span>Name:</span>
+  <input class="small" type="text" />
+  <span>Message:</span>
+  <input class="beeg" type="text" />
+  <input type="submit" value=":3"/>
+</div> %>
+
+<div>
+  <%= for [ name | msg ] <- Enum.reverse(@chat) do %>
+    <div>
+      <span><%= name %></span>
+      <span><%= msg %></span>
+    </div>
+  <% end %>
+</div>
