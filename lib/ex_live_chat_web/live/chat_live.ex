@@ -20,8 +20,8 @@ defmodule ExLiveChatWeb.ChatLive do
     {:noreply, socket}
   end
 
-  def handle_event("add", %{"text" => text}, socket) do
-    chat = [text | socket.assigns.chat]
+  def handle_event("add", %{"name" => name, "text" => text}, socket) do
+    chat = [[name, text] | socket.assigns.chat]
     IO.inspect(chat)
     {:noreply, assign(socket, :chat, chat)}
   end
