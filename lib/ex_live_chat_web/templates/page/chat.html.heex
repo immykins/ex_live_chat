@@ -1,7 +1,7 @@
-<form phx-submit="add">
+<form phx-submit="say" phx-change="change">
   <input class="small" type="text" name="name" value="guest">
   <input class="beeg" type="text" name="text" placeholder="msg" autofocus>
-  <input class="submit" type="submit" value="↻" />
+  <input class="submit" type="submit" value="↻" phx-throttle="1000" />
 </form>
 
 <%# <div class="form" phx-submit="msg">

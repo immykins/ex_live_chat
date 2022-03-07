@@ -15,9 +15,10 @@ defmodule ExLiveChat.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ExLiveChat.PubSub},
       # Start the Endpoint (http/https)
-      ExLiveChatWeb.Endpoint
+      ExLiveChatWeb.Endpoint,
       # Start a worker by calling: ExLiveChat.Worker.start_link(arg)
       # {ExLiveChat.Worker, arg}
+      ExLiveChat.ChatManager
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
