@@ -9,6 +9,9 @@ defmodule ExLiveChat.Chat do
   #   Phoenix.PubSub.subscribe(Demo.PubSub, @topic <> "#{user_id}")
   # end
 
+  def say(name, chat) do
+  end
+
   defp notify_subscribers({:ok, result}, event) do
     Phoenix.PubSub.broadcast(ExLiveChat.PubSub, @topic, {__MODULE__, event, result})
     {:ok, result}

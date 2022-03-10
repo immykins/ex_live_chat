@@ -6,11 +6,12 @@ defmodule ExLiveChatWeb.ChatLive do
   alias ExLiveChat.Chat
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, :chat, [["immy", "meow"]])
-    # socket = assign(socket, %{message: "msg"}, [])
-    # socket = assign(socket, )
-    socket = assign(socket, :typing, false)
-    {:ok, socket}
+    {
+      :ok,
+      socket
+      |> assign(:chat, [["immy", "meow"]])
+      |> assign(:typing, false)
+    }
   end
 
   # this can probably be moved into mount unless I need specific HTTP parameters
@@ -32,7 +33,7 @@ defmodule ExLiveChatWeb.ChatLive do
     # chat = [[name, text] | socket.assigns.chat]
     chat = socket.assigns.chat
     IO.inspect(chat)
-    Chat.say()
+    Chat.say(name, text)
 
     {:noreply, assign(socket, :chat, chat)}
   end
