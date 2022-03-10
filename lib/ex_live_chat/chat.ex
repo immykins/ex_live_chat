@@ -13,8 +13,8 @@ defmodule ExLiveChat.Chat do
     notify_subscribers(:say, params)
   end
 
-  def is_typing(name) do
-    notify_subscribers(:is_typing, name)
+  def is_typing(params) do
+    notify_subscribers(:is_typing, params)
   end
 
   # :say, %{"name" => name, "chat" => chat}

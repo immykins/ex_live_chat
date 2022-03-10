@@ -41,11 +41,15 @@ defmodule ExLiveChatWeb.ChatLive do
   # %{"_target" => target, "name" => name, "text" => text}
   def handle_event("change", %{"name" => name, "text" => _text}, socket) do
     IO.inspect(name)
-    Chat.is_typing(name)
+    Chat.is_typing(%{name: name})
     {:noreply, socket}
   end
 
-  def handle_info({Chat, [:user, :updated], _}, socket) do
+  # def handle_info({Chat, [:user, :updated], _}, socket) do
+  #   {:noreply, socket}
+  # end
+
+  def handle_info({Chat, :is_typing, %{name: name}}, socket) do
     {:noreply, socket}
   end
 
