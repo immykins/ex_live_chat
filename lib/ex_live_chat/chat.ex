@@ -9,14 +9,16 @@ defmodule ExLiveChat.Chat do
   #   Phoenix.PubSub.subscribe(Demo.PubSub, @topic <> "#{user_id}")
   # end
 
-  def say(name, chat) do
+  def say(params) do
+    notify_subscribers(:say, params)
   end
 
-  defp notify_subscribers({:ok, result}, event) do
-    Phoenix.PubSub.broadcast(ExLiveChat.PubSub, @topic, {__MODULE__, event, result})
-    {:ok, result}
+  def is_typing(name) do
+    notify_subscribers(:is_typing, name)
   end
 
-  # idk could do something with this probably
-  defp notify_subscribers({:error, reason}, _event), do: {:error, reason}
+  # :say, %{"name" => name, "chat" => chat}
+  defp notify_subscribers(event, params \\ %{}) do
+    Phoenix.PubSub.broadcast(ExLiveChat.PubSub, @topic, {__MODULE__, event, params})
+  end
 end

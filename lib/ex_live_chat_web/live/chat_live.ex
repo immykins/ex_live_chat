@@ -15,7 +15,7 @@ defmodule ExLiveChatWeb.ChatLive do
   end
 
   # this can probably be moved into mount unless I need specific HTTP parameters
-  def handle_params(%{"id" => _id}, _url, socket) do
+  def handle_params(_params, _url, socket) do
     if connected?(socket), do: Chat.subscribe()
     {:noreply, socket}
   end
@@ -32,15 +32,20 @@ defmodule ExLiveChatWeb.ChatLive do
   def handle_event("say", %{"name" => name, "text" => text}, socket) do
     # chat = [[name, text] | socket.assigns.chat]
     chat = socket.assigns.chat
-    IO.inspect(chat)
-    Chat.say(name, text)
+    # uhh make this cleaner somehow
+    Chat.say(%{"name" => name, "text" => text})
 
     {:noreply, assign(socket, :chat, chat)}
   end
 
   # %{"_target" => target, "name" => name, "text" => text}
-  def handle_event("change", something, socket) do
-    IO.inspect(something)
+  def handle_event("change", %{"name" => name, "text" => _text}, socket) do
+    IO.inspect(name)
+    Chat.is_typing(name)
+    {:noreply, socket}
+  end
+
+  def handle_info({Chat, [:user, :updated], _}, socket) do
     {:noreply, socket}
   end
 
