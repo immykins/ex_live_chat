@@ -4,15 +4,6 @@
   <input class="submit" type="submit" value="↻" phx-throttle="1000" />
 </form>
 
-<%# <div class="form" phx-submit="msg">
-  <
-  <span>Name:</span>
-  <input class="small" type="text" />
-  <span>Message:</span>
-  <input class="beeg" type="text" />
-  <input type="submit" value=":3"/>
-</div> %>
-
 <table>
   <tr>
     <th>user</th>
@@ -25,3 +16,7 @@
     </tr>
   <% end %>
 </table>
+
+<%= if @typing do %>
+  <%= @typing %> is typing...
+<% end %>
