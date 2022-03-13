@@ -50,7 +50,11 @@ defmodule ExLiveChatWeb.ChatLive do
   # end
 
   def handle_info({Chat, :say, %{"name" => name, "text" => text}}, socket) do
-    {:noreply, socket}
+    {
+      :noreply,
+      socket
+      |> assign(:chat, [[name, text] | socket.assigns.chat])
+    }
   end
 
   def handle_info({Chat, :is_typing, %{name: name}}, socket) do
